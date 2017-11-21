@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 
-int getColNames(char* colNames) {
+char** getColNames(char* colNames) {
 
 	char *token;
 	char **n_arr = (char**) malloc(sizeof(char*) * 100);
@@ -26,14 +26,7 @@ int getColNames(char* colNames) {
 		++i;
 	}
 
-	/*
-	 * TEMP - test to ensure column names are stored in array.
-	 */
-	for (int j = 0; j < 6 ; ++j) {
-		printf("%s\n", n_arr[j]);
-	}
-
-	return 0;
+	return n_arr;
 }
 
 
@@ -42,13 +35,26 @@ int main () {
 	 * Test getColNames(char *str) from stdin
 	 */
 	char buf[LINE_MAX];
+	char **arr;
 
 	if (!fgets(buf, LINE_MAX, stdin)) {
 		perror("fgets");
 	}
+	/*
+	 * Get rid of newline character in fgets buffer
+	 */
+	buf[strcspn(buf, "\n")] = 0;
 
 	char *tmp = strdup(buf);
-	getColNames(tmp);
+	arr = getColNames(tmp);
+
+	/*
+	 * Test return values of getColNames
+	 */
+	for (int j = 0; j < 6 ; ++j) {
+		printf("%s\n", arr[j]);
+	}
+
 	free(tmp);
 
 	return 0;
