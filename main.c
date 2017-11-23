@@ -57,7 +57,6 @@ int main () {
 	arr = getColNames(tmp);
 
 
-
 	/*
 	 * Test return values of getColNames
 	 */

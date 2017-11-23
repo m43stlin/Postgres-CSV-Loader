@@ -49,7 +49,6 @@ struct node* find(char* key) {
 }
 
 
-
 /*
  * Reverse the FIFO as a user would expect.
  */

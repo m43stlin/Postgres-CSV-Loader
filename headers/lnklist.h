@@ -23,5 +23,4 @@ int length();
 struct node* reverse(struct node** head_ref);
 struct node* find(char* key);
 
-
 #endif //POSTGRES_CSV_LOADER_LNKLIST_H
