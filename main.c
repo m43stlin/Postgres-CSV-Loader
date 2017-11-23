@@ -1,9 +1,13 @@
+#include "headers/lnklist.h"
+
 #include <string.h>
 #include <stdio.h>
 #include <zconf.h>
 #include <stdlib.h>
 
-
+/*
+ * Getting the column names from the first line in the csv file/list.
+ */
 char** getColNames(char* colNames) {
 
 	char *token;
@@ -52,11 +56,12 @@ int main () {
 	 * Test return values of getColNames
 	 */
 	for (int j = 0; j < 6 ; ++j) {
-		printf("%s\n", arr[j]);
+		insertFirst(arr[j], "test");
 	}
 
+	printList();
 	free(tmp);
 
-	
+
 	return 0;
 }
