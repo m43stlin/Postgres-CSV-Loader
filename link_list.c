@@ -15,6 +15,40 @@ struct node {
 
 struct node *head = NULL;
 struct node *current = NULL;
+struct node *del_search = NULL;
+
+/*
+ * Finding a link with a given key.
+ */
+struct node* find(char* key) {
+	/*
+	 * Start from the beginning.
+	 */
+	struct node* current = head;
+
+	/*
+	 * Check if empty.
+	 */
+	if (head == NULL) {
+		return NULL;
+	}
+
+	/*
+	 * Check if we are at the last node if not
+	 * proceed.
+	 */
+	while (current -> key != key) {
+		if (current -> next == NULL) {
+			return NULL;
+		} else {
+			current = current -> next;
+		}
+	}
+
+	return current;
+}
+
+
 
 /*
  * Reverse the FIFO as a user would expect.
@@ -49,6 +83,8 @@ void printList() {
 	}
 
 	printf(" ]");
+
+
 }
 
 /*
@@ -95,7 +131,7 @@ struct node* deleteFirst() {
 	return tempLink;
 }
 
-struct node* delete(char* key) {
+struct node* deleteOne(char* key) {
 
 	struct node* current  = head;
 	struct node* previous = NULL;
@@ -148,37 +184,6 @@ int length() {
 	}
 
 	return length;
-}
-
-/*
- * Finding a link with a given key.
- */
-struct node* find(char* key) {
-	/*
-	 * Start from the beginning.
-	 */
-	struct node* current = head;
-
-	/*
-	 * Check if empty.
-	 */
-	if (head == NULL) {
-		return NULL;
-	}
-
-	/*
-	 * Check if we are at the last node if not
-	 * proceed.
-	 */
-	while (current -> key != key) {
-		if (current -> next == NULL) {
-			return NULL;
-		} else {
-			current = current -> next;
-		}
-	}
-
-	return current;
 }
 
 
