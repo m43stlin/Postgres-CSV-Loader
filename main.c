@@ -5,13 +5,15 @@
 #include <zconf.h>
 #include <stdlib.h>
 
+
+
 /*
  * Getting the column names from the first line in the csv file/list.
  */
 char** getColNames(char* colNames) {
 
 	char *token;
-	char **n_arr = (char**) malloc(sizeof(char*) * 100);
+	char **n_arr = (char **) malloc(sizeof(char *) * 100);
 	int i = 0;
 
 	/*
@@ -33,6 +35,8 @@ char** getColNames(char* colNames) {
 	return n_arr;
 }
 
+struct node* l_list;
+struct node* ptr;
 
 int main () {
 	/*
@@ -52,6 +56,8 @@ int main () {
 	char *tmp = strdup(buf);
 	arr = getColNames(tmp);
 
+
+
 	/*
 	 * Test return values of getColNames
 	 */
@@ -59,7 +65,21 @@ int main () {
 		insertFirst(arr[j], "test");
 	}
 
+
+	//delete("id");
+
+
 	printList();
+
+	printf("\n%d\n", length());
+	struct node* crrnt = head;
+
+
+	printf("%s\n", crrnt->key);
+	crrnt = crrnt->next;
+	printf("%s\n", crrnt->key);
+
+
 	free(tmp);
 
 
