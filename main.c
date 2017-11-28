@@ -1,7 +1,6 @@
 #include "headers/lnklist.h"
 #include "headers/tble_funcs.h"
 
-#include <string.h>
 #include <stdio.h>
 #include <zconf.h>
 #include <stdlib.h>
