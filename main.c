@@ -1,4 +1,5 @@
 #include "headers/lnklist.h"
+#include "headers/tble_funcs.h"
 
 #include <string.h>
 #include <stdio.h>
@@ -6,81 +7,71 @@
 #include <stdlib.h>
 
 
-
-/*
- * Getting the column names from the first line in the csv file/list.
- */
-char** getColNames(char* colNames) {
-
-	char *token;
-	char **n_arr = (char **) malloc(sizeof(char *) * 100);
-	int i = 0;
-
-	/*
-	 * Get the first token
-	 */
-	n_arr[i] = token = strtok(colNames, ",");
-	++i;
-
-	/*
-	 * Walk through the remaining tokens.
-	 */
-	while (token != NULL) {
-		token = strtok(NULL, ",");
-
-		n_arr[i] = token;
-		++i;
-	}
-
-	return n_arr;
-}
-
-struct node* l_list;
-struct node* ptr;
-
 int main () {
+
 	/*
-	 * Test getColNames(char *str) from stdin
+	 * getColNames(char *str) from stdin
 	 */
 	char buf[LINE_MAX];
-	char **arr;
 
 	if (!fgets(buf, LINE_MAX, stdin)) {
 		perror("fgets");
 	}
+
 	/*
-	 * Get rid of newline character in fgets buffer
+	 * Get rid of newline character in fgets buffer.
 	 */
 	buf[strcspn(buf, "\n")] = 0;
 
+	/*
+	 * Store column names in array.
+	 */
 	char *tmp = strdup(buf);
-	arr = getColNames(tmp);
-
+	char** arr = getColNames(tmp);
 
 	/*
-	 * Test return values of getColNames
+	 * Set the current node to the head.
 	 */
-	for (int j = 0; j < 6 ; ++j) {
-		insertFirst(arr[j], "test");
-	}
-
-
-	//delete("id");
-
-
-	printList();
-
-	printf("\n%d\n", length());
 	struct node* crrnt = head;
 
+	/*
+	 * Populate columns
+	 */
+	for (int j = 0; arr[j]; j++) {
+		insertFirst(arr[j], arr[j]);
+	}
 
-	printf("%s\n", crrnt->key);
+	/*
+	 * Print the linked list.
+	 */
+	printList();
+
+	/*
+	 * Print the length of the linked list.
+	 */
+	printf("\nLength of linked list: %d", length());
+
+	/*
+	 * Find at what index the value "id" exist and print it.
+	 */
+	printf("\nFound value id at key: %d",find("id"));
+
+	/*
+	 * Set current node back to head.
+	 */
+	crrnt = head;
+
+	/*
+	 * Test some values in the linked using
+	 */
+	printf("\n%s\n", crrnt->key);
 	crrnt = crrnt->next;
 	printf("%s\n", crrnt->key);
 
-
+	/*
+	 * Free fgets buffer.
+	 */
 	free(tmp);
-
 
 	return 0;
 }
