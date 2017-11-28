@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <malloc.h>
 #include <stdbool.h>
+#include <memory.h>
 
 /*
  * functions for the link list which will store the data from the rows
@@ -20,32 +21,28 @@ struct node *del_search = NULL;
 /*
  * Finding a link with a given key.
  */
-struct node* find(char* key) {
+int find(char* key) {
 	/*
 	 * Start from the beginning.
 	 */
 	struct node* current = head;
 
-	/*
-	 * Check if empty.
-	 */
-	if (head == NULL) {
-		return NULL;
-	}
+	int index = 0;
 
 	/*
 	 * Check if we are at the last node if not
 	 * proceed.
 	 */
-	while (current -> key != key) {
-		if (current -> next == NULL) {
-			return NULL;
-		} else {
-			current = current -> next;
+	while (current->next != NULL) {
+		int cmp = strcmp(key, current->key);
+		if (cmp == 0) {
+				return index;
 		}
+		current = current->next;
+		index++;
 	}
 
-	return current;
+	return -1;
 }
 
 
@@ -82,8 +79,6 @@ void printList() {
 	}
 
 	printf(" ]");
-
-
 }
 
 /*
@@ -100,7 +95,6 @@ void insertFirst(char* key, char* data) {
 	 */
 	link->next = head;
 	head = link;
-
 }
 
 /*
@@ -130,7 +124,7 @@ struct node* deleteFirst() {
 	return tempLink;
 }
 
-struct node* deleteOne(char* key) {
+struct node* delete(char* key) {
 
 	struct node* current  = head;
 	struct node* previous = NULL;
@@ -184,6 +178,3 @@ int length() {
 
 	return length;
 }
-
-
-
