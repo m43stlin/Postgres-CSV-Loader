@@ -1,8 +1,8 @@
-#include <stdbool.h>
-#include <stddef.h>
-
 #ifndef POSTGRES_CSV_LOADER_LNKLIST_H
 #define POSTGRES_CSV_LOADER_LNKLIST_H
+
+#include <stdbool.h>
+#include <stddef.h>
 
 struct node {
 	char* data;
@@ -21,6 +21,6 @@ struct node* delete(char* key);
 bool isEmpty();
 int length();
 struct node* reverse(struct node** head_ref);
-struct node* find(char* key);
+int find(char* key);
 
 #endif //POSTGRES_CSV_LOADER_LNKLIST_H
